@@ -1,27 +1,21 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"fmt"
 	"net/http"
+
+	router "github.com/panda8z/time-book/routers"
 )
 
+func main() {
+	r := router.InitRouter()
+	s := &http.Server{
+		Addr:           fmt.Sprint(":%d", setting.HTTPPort),
+		Handler:        r,
+		ReadTimeout:    setting.ReadTimeout,
+		WriteTimeout:   setting.WriteTimeout,
+		MaxHeaderBytes: 1 << 20,
+	}
+	s.ListenAndServe()
 
-func main()  {
-	r := gin.Default()
-
-	r.GET("/", func(c *gin.Context){
-		c.JSON(http.StatusOK, gin.H{
-			"index": "a",
-			"index-text" : 33,
-		})
-	})
-	
-	r.POST("/", func(c *gin.Context){
-		c.JSON(http.StatusOK, gin.H{
-			"index": "a",
-			"index-text" : 33,
-		})
-	})
-
-	r.Run(":9090")
 }

@@ -8,7 +8,7 @@
 // 	 PRIMARY KEY ( `user_id` )
 //   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-package model
+package models
 
 import (
 	"time"

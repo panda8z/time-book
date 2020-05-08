@@ -12,7 +12,7 @@
 //   PRIMARY KEY (`note_id`)
 // ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
-package model
+package models
 
 import (
 	"time"
@@ -20,14 +20,14 @@ import (
 
 // Note  定义
 type Note struct {
-	NoteID       int64     `db:"note_id"`
-	CategorID    int64     `db:"category_id"`
-	Content      string    `db:"content"`
-	Img          string    `db:"img"`
-	ViewCount    uint32    `db:"view_count"`
-	CommentCount uint32    `db:"comment_count"`
-	UserID       int64     `db:"user_id"`
-	Status       int16     `db:"status"`
-	CreateTime   time.Time `db:"create_time"`
-	UpdateTime   time.Time `db:"update_time"`
+	NoteID       int64     `json:"note_id"`
+	CategorID    int64     `json:"category_id"`
+	Content      string    `json:"content"`
+	Img          string    `json:"img"`
+	ViewCount    uint32    `json:"view_count"`
+	CommentCount uint32    `json:"comment_count"`
+	UserID       int64     `json:"user_id"`
+	Status       int16     `json:"status"`
+	CreateTime   time.Time `json:"create_time"`
+	UpdateTime   time.Time `json:"update_time"`
 }

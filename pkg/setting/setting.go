@@ -1,10 +1,10 @@
-package settings
+package setting
 
 import (
 	"log"
 	"time"
 
-	"gopkg.in/ini.v1"
+	"github.com/go-ini/ini"
 )
 
 // Server setting model
@@ -52,6 +52,10 @@ func init() {
 		log.Fatalf("setting.Setup, fail to parse 'config/config.ini': %v", err)
 	}
 
+	loadBase()
+	loadServer()
+	loadApp()
+	loadDatabase()
 }
 
 func loadBase() {
@@ -77,16 +81,10 @@ func loadApp() {
 
 	JwtSecret = sec.Key("JWT_SECRET").MustString("!@)*#)!@U#@*!@!)")
 	PageSize = sec.Key("PAGE_SIZE").MustInt(10)
+	sec.Key("sss").MustString()
 }
 
 func loadDatabase() {
+	// nothing
 
-}
-
-// mapTo map section
-func mapTo(section string, v interface{}) {
-	err := cfg.Section(section).MapTo(v)
-	if err != nil {
-		log.Fatalf("Cfg.MapTo %s err: %v", section, err)
-	}
 }
