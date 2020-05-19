@@ -7,7 +7,7 @@ import (
 
 // InitRouter with no warnning
 func InitRouter() *gin.Engine {
-	engine := New()
+	engine := gin.New()
 	gin.SetMode(setting.RunMode)
 	engine.Use(gin.Logger())
 	engine.Use(gin.Recovery())

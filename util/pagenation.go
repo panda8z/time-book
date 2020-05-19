@@ -8,10 +8,10 @@ import (
 	"github.com/panda8z/time-book/pkg/setting"
 )
 
-// GetPage : get specify page`s first index number
-func GetPage(c *gin.Context) int {
-	i := 0
-	page, _ := strconv.ParseInt(c.Query("page"))
+// Page : get specify page`s first index number
+func Page(c *gin.Context) int64 {
+	var i int64
+	page, _ := strconv.ParseInt(c.Query("page"),10,64)
 	if page > 0 {
 		i = (page - 1) * setting.PageSize
 	}

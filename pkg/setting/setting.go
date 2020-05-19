@@ -37,11 +37,11 @@ var (
 	// RunMode server mod
 	RunMode string
 	// HTTPPort of server
-	HTTPPort int
+	HTTPPort int64
 	// JwtSecret for server
 	JwtSecret string
 	// PageSize for application on mobile or web browser
-	PageSize int
+	PageSize int64
 )
 
 // Setup initialize the configuration instance
@@ -67,7 +67,7 @@ func loadServer() {
 	if err != nil {
 		log.Fatalf("Fail to get section 'server': %v", err)
 	}
-	HTTPPort = sec.Key("HTTPPort").MustInt(8000)
+	HTTPPort = int64(sec.Key("HTTPPort").MustInt(8000))
 	ReadTimeout = time.Duration(sec.Key("READ_TIMEOUT").MustDuration(60)) * time.Second
 	WriteTimeout = time.Duration(sec.Key("WRITE_TIMEOUT").MustDuration(60)) * time.Second
 
@@ -80,8 +80,8 @@ func loadApp() {
 	}
 
 	JwtSecret = sec.Key("JWT_SECRET").MustString("!@)*#)!@U#@*!@!)")
-	PageSize = sec.Key("PAGE_SIZE").MustInt(10)
-	sec.Key("sss").MustString()
+	PageSize = int64(sec.Key("PAGE_SIZE").MustInt(10))
+
 }
 
 func loadDatabase() {
