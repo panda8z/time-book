@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/panda8z/time-book/pkg/setting"
 	"net/http"
 
 	router "github.com/panda8z/time-book/routers"
