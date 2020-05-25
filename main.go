@@ -2,21 +2,30 @@ package main
 
 import (
 	"fmt"
-	"github.com/panda8z/time-book/pkg/setting"
-	"net/http"
-
-	router "github.com/panda8z/time-book/routers"
+	"github.com/gofiber/fiber"
 )
 
 func main() {
-	r := router.InitRouter()
-	s := &http.Server{
-		Addr:           fmt.Sprint(":%d", setting.HTTPPort),
-		Handler:        r,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
-		MaxHeaderBytes: 1 << 20,
-	}
-	s.ListenAndServe()
+	app := fiber.New()
 
+	app.Get("/:name/:age?", func(c *fiber.Ctx) {
+		str := fmt.Sprintf("First route: [name]: %s [age]: %s\n", c.Params("name"), c.Params("age"))
+		c.SendString(str)
+		c.Next() // Continue the stack
+	})
+
+	app.Get("/api/*", func(c *fiber.Ctx) {
+		str := fmt.Sprintf("Last route:  [*]: %s\n", c.Params("*"))
+		c.SendString(str)
+	})
+
+	app.Get("/panda/*", func(c *fiber.Ctx) {
+		str := fmt.Sprintf("Lastest route:  [*]: %s\n", c.Params("*"))
+		c.SendString(str)
+	})
+
+	app.Listen(3000)
+	// GET /api/register
+	// First route: [name]: api [age]: register
+	// Last route:  [*]: register
 }
