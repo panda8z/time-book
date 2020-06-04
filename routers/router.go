@@ -5,9 +5,10 @@ import (
 	"github.com/gofiber/fiber"
 )
 
-func InitRouter() *fiber.App {
+// InitR is the router`s initialization func
+func InitR() *fiber.App {
 	app := fiber.New()
-
+	// test for index router
 	app.Get("/" , func(ctx *fiber.Ctx) {
 		var str string
 		page := ctx.Query("page")
@@ -16,6 +17,7 @@ func InitRouter() *fiber.App {
 		}
 		ctx.SendString("Hello World!\n" + str)
 	})
+	// Api version 01 for web Ui / mobile app
 	v1Api := app.Group("/api/v1")
 	v1Api.Get("/test", func(c *fiber.Ctx) {
 		content := fmt.Sprintf("We recived a Name: %s", c.Query("name"))
@@ -23,6 +25,7 @@ func InitRouter() *fiber.App {
 	})
 
 	// Last middleware to match anything
+	// 404 handler copy from fiber example
 	app.Use(func(c *fiber.Ctx) {
 		c.SendStatus(404) // => 404 "Not Found"
 		c.SendString("404 了！")

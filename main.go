@@ -7,7 +7,7 @@ import (
 
 func main(){
 
-	app := routers.InitRouter()
+	app := routers.InitR()
 
 	app.Listen(settings.HTTPPort)
 }
