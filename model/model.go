@@ -1,4 +1,4 @@
-package models
+package model
 
 import (
 	"fmt"
@@ -11,11 +11,14 @@ import (
 )
 
 var db *gorm.DB
+
+// Model is the common segment for every s
 type Model struct {
 	ID int `gorm:"primary_key" json:"id"`
 	CreatedOn int `json:"created_on"`
 	ModifiedOn int `json:"modified_on"`
 }
+
 func init() {
 	var(
 		err error
