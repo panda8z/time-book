@@ -12,6 +12,7 @@ type auth struct {
 	Password string `valid:"Required; MaxSize(50)"`
 }
 
+// Auth is a getter func
 func Auth(c *fiber.Ctx) {
 	userName := c.Query("username")
 	password := c.Query("password")

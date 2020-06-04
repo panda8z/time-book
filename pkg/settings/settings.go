@@ -5,6 +5,7 @@ import (
 	"time"
 )
 const (
+	// RUN_MODE setting option
 	RUN_MODE = "RUN_MODE"
 	PAGE_SIZE ="PAGE_SIZE"
 	JWT_SECRET = "JWT_SECRET"
@@ -22,10 +23,14 @@ var (
 	// Tbvi globle viper
 	TbVi *viper.Viper
 
+	// RunMode debug or release
 	RunMode string
 
+
 	HTTPPort int
+
 	ReadTimeout time.Duration
+
 	WriteTimeout time.Duration
 
 	PageSize int64
