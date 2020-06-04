@@ -32,4 +32,57 @@ go get -u github.com/astaxie/beego/validation
 ```bash
 go get -u github.com/dgrijalva/jwt-go
 ```
- 
+
+服务端配置信息
+```yaml
+# debug or release
+RUN_MODE: debug
+
+# [app]
+PAGE_SIZE: 10
+JWT_SECRET: 23347$040412
+
+# [server]
+HTTP_PORT: 3000
+READ_TIMEOUT: 60
+WRITE_TIMEOUT: 60
+
+#[database]
+TYPE: mysql
+USER: xxx
+PASSWORD: 123456
+#127.0.0.1:3306
+HOST: 127.0.0.1:3306
+NAME: tbook
+TABLE_PREFIX: tbook_
+```
+
+安装 docker 后 拉取最近的 mysql 镜像
+```bash
+docker pull mysql
+```
+
+开启一个 mysql docker 容器
+```bash
+docker run --name mysql \
+-v $HOME/docker-mysql/conf:/etc/mysql/conf.d \
+-v $HOME/docker-mysql/logs:/logs \
+-v $HOME/docker-mysql/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 \
+-d \
+-i \
+-p 3306:3306 mysql 
+```
+
+进入 mysql 容器 登录数据库 新建一个数据库 tbook
+```bash
+docker start mysql
+docker exec -it mysql bash
+$ mysql -u root -p
+123456
+> show databases;
+> create database tbook;
+> show databases;
+> quit;
+$ exit
+```
