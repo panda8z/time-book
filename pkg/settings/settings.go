@@ -26,7 +26,6 @@ var (
 	// RunMode debug or release
 	RunMode string
 
-
 	HTTPPort int
 
 	ReadTimeout time.Duration

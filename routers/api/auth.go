@@ -1,10 +1,13 @@
 package api
 
 import (
+	"net/http"
+
 	"github.com/astaxie/beego/validation"
-	"github.com/gofiber/fiber"
-	models "github.com/panda8z/time-book/model"
+	"github.com/gin-gonic/gin"
+	"github.com/panda8z/time-book/model"
 	"github.com/panda8z/time-book/pkg/e"
+	"github.com/panda8z/time-book/utils"
 )
 
 type auth struct {
@@ -13,22 +16,22 @@ type auth struct {
 }
 
 // Auth is a getter func
-func Auth(c *fiber.Ctx) {
+func Auth(c *gin.Context) {
 	userName := c.Query("username")
 	password := c.Query("password")
-
 	valid := validation.Validation{}
 	a := auth{Password: password, Username: userName}
+	// valid from beego/validation
 	ok, _ := valid.Valid(&a)
 
 	data := make(map[string]interface{})
 	code := e.INVALID_PARAMS
 	if ok {
-		isExits := models.CheckAuth(userName, password)
+		isExits := model.CheckAuth(userName, password)
 		if isExits {
-			token, err := uitls.GenerateToken(userName, password)
+			token, err := utils.GenerateToken(userName, password)
 			if err != nil {
-				code = e.ERROR_AUTH_CHECK_TOKEN_FAIL
+				code = e.ERROR_AUTH_TOKEN
 			} else {
 				data["token"] = token
 				code = e.SUCCESS
@@ -37,6 +40,5 @@ func Auth(c *fiber.Ctx) {
 			code = e.ERROR_AUTH
 		}
 	}
-	c.SendStatus(e.SUCCESS)
-	c.JSON(map[string]interface{}{"code": code, "msg": e.Msg(code), "data": data})
+	c.JSON(http.StatusOK, gin.H{"code": code, "msg": e.Msg(code), "data": data})
 }

@@ -12,9 +12,9 @@ WRITE_TIMEOUT: 60
 
 #[database]
 TYPE: mysql
-USER: panda
+USER: root
 PASSWORD: 123456
 #127.0.0.1:3306
 HOST: 127.0.0.1:3306
 NAME: tbook
-TABLE_PREFIX: tbook_
+TABLE_PREFIX: tb_

@@ -2,27 +2,29 @@ package model
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/panda8z/time-book/pkg/settings"
 	"log"
+	"os"
 	"reflect"
 	"time"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql" // for gorm
+	"github.com/panda8z/time-book/pkg/settings"
 )
 
 var db *gorm.DB
 
 // Model is the common segment for every s
 type Model struct {
-	ID int `gorm:"primary_key" json:"id"`
-	CreatedOn int `json:"created_on"`
+	ID         int `gorm:"primary_key" json:"id"`
+	CreatedOn  int `json:"created_on"`
 	ModifiedOn int `json:"modified_on"`
 }
 
 func init() {
-	var(
-		err error
-		dbType, dbName, dbUser, dbPassword, tablePrefix,dbHost string
+	var (
+		err                                                     error
+		dbType, dbName, dbUser, dbPassword, tablePrefix, dbHost string
 	)
 	vi := settings.TbVi
 	dbType = vi.GetString(settings.TYPE)
@@ -49,6 +51,7 @@ func init() {
 	db.LogMode(true)
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
+	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
 	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallback)
 	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
 }
