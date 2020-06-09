@@ -3,7 +3,6 @@ package model
 import (
 	"fmt"
 	"log"
-	"os"
 	"reflect"
 	"time"
 
@@ -22,6 +21,11 @@ type Model struct {
 }
 
 func init() {
+	Init()
+}
+
+// Init for mysql database
+func Init() {
 	var (
 		err                                                     error
 		dbType, dbName, dbUser, dbPassword, tablePrefix, dbHost string
@@ -51,7 +55,7 @@ func init() {
 	db.LogMode(true)
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(100)
-	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
+	// db.SetLogger(log.New(os.Stdout, "\r\n", 0))
 	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallback)
 	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
 }

@@ -3,11 +3,10 @@ package model
 import (
 	"testing"
 	"time"
-	"github.com/panda8z/model"
 )
 
-func init()  {
-
+func init() {
+	Init()
 }
 func TestAddN(t *testing.T) {
 	nList := []*Note{

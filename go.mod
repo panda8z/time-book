@@ -17,10 +17,11 @@ require (
 )
 
 replace (
-	github.com/panda8z/time-book/model => ./model
 	github.com/panda8z/time-book/middleware/jwt => ./middleware/jwt
 	github.com/panda8z/time-book/pkg/settings => ./pkg/settings
+	github.com/panda8z/time-book/pkg/e => ./pkg/e
+	github.com/panda8z/time-book/routers/api => ./routers/api
 	github.com/panda8z/time-book/routers => ./routers
 	github.com/panda8z/time-book/utils => ./utils
-	github.com/panda8z/time-book/pkg/e => ./pkg/e
+	github.com/panda8z/time-book/model => ./model
 )
