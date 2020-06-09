@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql" // for gorm
 	"github.com/panda8z/time-book/pkg/settings"
@@ -37,12 +38,13 @@ func Init() {
 	dbHost = vi.GetString(settings.HOST)
 	dbPassword = vi.GetString(settings.PASSWORD)
 	tablePrefix = vi.GetString(settings.TABLE_PREFIX)
-
-	db, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
-		dbUser,
-		dbPassword,
-		dbHost,
-		dbName))
+	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	dbUser,
+	dbPassword,
+	dbHost,
+	dbName)
+	log.Println(dns)
+	db, err = gorm.Open(dbType, dns)
 
 	if err != nil {
 		log.Println(err)

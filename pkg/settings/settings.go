@@ -1,24 +1,28 @@
 package settings
 
 import (
-	"github.com/spf13/viper"
+	"log"
 	"time"
+
+	"github.com/spf13/viper"
 )
+
 const (
 	// RUN_MODE setting option
-	RUN_MODE = "RUN_MODE"
-	PAGE_SIZE ="PAGE_SIZE"
-	JWT_SECRET = "JWT_SECRET"
-	HTTP_PORT = "HTTP_PORT"
-	READ_TIMEOUT = "READ_TIMEOUT"
+	RUN_MODE      = "RUN_MODE"
+	PAGE_SIZE     = "PAGE_SIZE"
+	JWT_SECRET    = "JWT_SECRET"
+	HTTP_PORT     = "HTTP_PORT"
+	READ_TIMEOUT  = "READ_TIMEOUT"
 	WRITE_TIMEOUT = "WRITE_TIMEOUT"
-	TYPE = "TYPE"
-	USER = "USER"
-	PASSWORD = "PASSWORD"
-	HOST = "HOST"
-	NAME = "NAME"
-	TABLE_PREFIX = "TABLE_PREFIX"
+	TYPE          = "TYPE"
+	USER          = "USER"
+	PASSWORD      = "PASSWORD"
+	HOST          = "HOST"
+	NAME          = "NAME"
+	TABLE_PREFIX  = "TABLE_PREFIX"
 )
+
 var (
 	// Tbvi globle viper
 	TbVi *viper.Viper
@@ -32,7 +36,7 @@ var (
 
 	WriteTimeout time.Duration
 
-	PageSize int64
+	PageSize  int64
 	JwtSecret string
 )
 
@@ -45,8 +49,8 @@ func init() {
 	loadBase()
 	loadServer()
 	loadApp()
+	log.Println("settings package init complete")
 }
-
 
 func loadApp() {
 	PageSize = TbVi.GetInt64(PAGE_SIZE)
@@ -62,4 +66,3 @@ func loadServer() {
 func loadBase() {
 	RunMode = TbVi.GetString(RUN_MODE)
 }
-
