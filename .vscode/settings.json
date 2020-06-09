@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "connectionTimeout": 5,
+            "database": "tbook",
+            "driver": "MySQL",
+            "group": "time-book",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "root",
+            "password": "123456",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
