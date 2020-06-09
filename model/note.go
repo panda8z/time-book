@@ -27,6 +27,13 @@ func NoteExistByID(id int) bool {
 
 }
 
+// GetNList is get a slice of Note
+func GetNList(pageNum, pageSize int, maps map[string]interface{}) []Note {
+	nList := []Note{}
+	db.Where(maps).Offset(pageNum).Limit(pageSize).Find(nList)
+	return nList
+}
+
 // GetN is a getter handler
 func GetN(id int) (n *Note) {
 	// SELECT * FROM users WHERE id = ? LIMIT 1;
