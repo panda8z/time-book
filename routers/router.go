@@ -28,6 +28,8 @@ func InitR() *gin.Engine {
 		ctx.JSON(http.StatusOK, gin.H{"msg": "Hello World!\n" + str})
 	})
 
+	app.Static("/static", "./web-client/static")
+
 	// auth first
 	app.GET("/auth", api.Auth)
 	// Api version 01 for web Ui / mobile app
