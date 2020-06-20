@@ -32,6 +32,7 @@ func InitR() *gin.Engine {
 
 	// auth first
 	app.GET("/auth", api.Auth)
+	app.POST("/auth", api.AddAuth)
 	// Api version 01 for web Ui / mobile app
 	v1Api := app.Group("/api/v1")
 	// use jwt middleware

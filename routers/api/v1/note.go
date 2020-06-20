@@ -90,7 +90,7 @@ func AddN(c *gin.Context) {
 
 // DeleteN is delete the note handler
 func DeleteN(c *gin.Context) {
-
+	
 }
 
 // EditN is edit the note handler
