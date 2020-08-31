@@ -41,7 +41,7 @@ func TestAddN(t *testing.T) {
 func TestDeletN(t *testing.T) {
 	n := &Note{}
 	db.Last(n)
-	err := DeleteN(n.ID)
+	err := DeleteN(int(n.ID))
 	if err != nil {
 		t.Error(err.Error())
 	}
@@ -51,7 +51,7 @@ func TestDeletN(t *testing.T) {
 func TestEditN(t *testing.T) {
 	n := &Note{}
 	db.Last(n)
-	EditN(n.ID, gin.H{
+	EditN(int(n.ID), gin.H{
 		"content": "我不是黄铜，我是青铜",
 	})
 }

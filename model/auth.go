@@ -1,10 +1,13 @@
 package model
 
-import "errors"
+import (
+	"errors"
+	"github.com/jinzhu/gorm"
+)
 
 // Auth is the basic auth data model in database
 type Auth struct {
-	ID       int    `gorm:"primary_key" json:"id"`
+	gorm.Model
 	Username string `json:"username"`
 	Password string `json:"password"`
 }

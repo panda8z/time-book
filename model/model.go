@@ -60,6 +60,7 @@ func Init() {
 	// db.SetLogger(log.New(os.Stdout, "\r\n", 0))
 	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallback)
 	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallback)
+	db.AutoMigrate(&Auth{})
 }
 
 // CloseDB release resources

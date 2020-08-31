@@ -38,6 +38,7 @@ func InitR() *gin.Engine {
 	// use jwt middleware
 	v1Api.Use(jwt.JWT())
 	v1Api.GET("/note/:id", v1.Note)
+	v1Api.GET("/note_list", v1.NoteList)
 	v1Api.POST("/note", v1.AddN)
 	v1Api.DELETE("note/:id", v1.DeleteN)
 	v1Api.PUT("/note/:id", v1.EditN)

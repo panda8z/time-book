@@ -9,8 +9,8 @@ import (
 
 // Note is the model for note segment
 type Note struct {
-	Model
-	State   int32  `json:state gorm:"default:1"` // 1 可用 -1 删除 0 停用
+	gorm.Model
+	State   int32  `json:"state" gorm:"default:1"` // 1 可用 -1 删除 0 停用
 	Type    string `json:"type" gorm:"default:'galeone'"`
 	Content string `json:"content"`
 }
@@ -52,7 +52,7 @@ func AddN(nType, content string) (id int, err error) {
 
 	db.Model(&n).Related(&n.Model)
 	log.Println("after add note id is", n)
-	return n.Model.ID, dbase.Error // TODO: return with insert ID
+	return int(n.ID), dbase.Error // TODO: return with insert ID
 }
 
 // DeleteN is delete the note handler

@@ -12,6 +12,26 @@ import (
 	"github.com/panda8z/time-book/utils"
 )
 
+func NoteList(c *gin.Context)  {
+	code := e.INVALID_PARAMS
+	msg := ""
+	pageNum, err := utils.StrTo(c.Param("pageNum")).Int()
+	if err != nil {
+		msg += "缺少pageNum;"
+	}
+	pageSize, err := utils.StrTo(c.Param("pageSize")).Int()
+	if err != nil {
+		msg += "缺少pageSize;"
+	}
+
+	nList := model.GetNList(pageNum,pageSize,map[string]interface{}{})
+	c.JSON(http.StatusOK, gin.H{
+		"code": 200,
+		"msg":  fmt.Sprintf("%s %s", e.Msg(code), msg),
+		"data": nList,
+	})
+}
+
 // Note is a getter handler
 // api/v1/note/:id
 func Note(c *gin.Context) {
